@@ -46,12 +46,6 @@ p {
     margin-right: auto;
 }
 
-@media (max-width: 1024px) {
-    p {
-        max-width: 80vw;
-    }
-}
-
 header, footer, section {
     padding-top: 10vh;
     padding-bottom: 10vh;
@@ -80,4 +74,14 @@ img.scaled {
 
 img.scaled.visible {
   opacity: 1;
+}
+
+@media (max-width: 1024px) {
+    p {
+        max-width: 80vw;
+    }
+
+    img.scaled {
+        max-width: 100%;
+    }
 }
