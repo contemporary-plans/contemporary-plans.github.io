@@ -63,13 +63,17 @@ header, footer {
     background-color: #fff;
 }
 
+figure {
+    margin: auto;
+}
+
 img.scaled {
     margin: 0;
     padding: 0;
     display: inline;
     opacity: 0;
     transition: opacity 1s ease-in-out;
-    max-width: 200%;
+    max-width: 100%;
 }
 
 img.scaled.visible {
@@ -79,9 +83,5 @@ img.scaled.visible {
 @media (max-width: 1024px) {
     p {
         max-width: 80vw;
-    }
-
-    img.scaled {
-        max-width: 100%;
     }
 }
