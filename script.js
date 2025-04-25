@@ -4,7 +4,6 @@ function storeOriginalSizes(images) {
   images.forEach(image => {
     if (!image.dataset.origW) {
       image.dataset.origW = image.naturalWidth;
-      image.dataset.origH = image.naturalHeight;
     }
   });
 }
@@ -14,14 +13,9 @@ function resizeImages(images) {
 
   images.forEach(image => {
     const origW = image.dataset.origW;
-    const origH = image.dataset.origH;
 
-    if (origW && origH) {
+    if (origW) {
       image.style.width  = (origW / resizeFactor) + 'px';
-      image.style.height = (origH / resizeFactor) + 'px';
-
-      console.log((origW / resizeFactor));
-      console.log((origH / resizeFactor));
     }
   });
 }
