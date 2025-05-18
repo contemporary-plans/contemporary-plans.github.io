@@ -9,13 +9,24 @@ function storeOriginalSizes(images) {
 }
 
 function resizeImages(images) {
-  console.log('Resizing images');
-
   images.forEach(image => {
     const origW = image.dataset.origW;
-
-    if (origW) {
+    const origH = image.naturalHeight;
+    
+    if (origW && origH) {
       image.style.width  = (origW / resizeFactor) + 'px';
+
+      const cropClass = [...image.classList].find(c => /^crop(\d+)$/.test(c));
+    
+      if (cropClass) {
+        const pct = parseInt(cropClass.replace('crop', ''), 10);
+        const visible = 100.0 - 2 * pct;
+        const newH = (origH * 1.0 / resizeFactor) * (visible / 100.0);
+
+        image.style.height = newH + 'px';
+        image.style.objectFit = 'cover';    // fills width, lets height crop
+        image.style.objectPosition = 'center';   // trim evenly top & bottom
+      }
     }
   });
 }
