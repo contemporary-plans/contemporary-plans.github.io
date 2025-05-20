@@ -1,15 +1,15 @@
 const resizeFactor = 2;
 
-function storeOriginalSizes(images) {
-  images.forEach(image => {
+function storeScaled(scaled) {
+  scaled.forEach(image => {
     if (!image.dataset.origW) {
       image.dataset.origW = image.naturalWidth;
     }
   });
 }
 
-function resizeImages(images) {
-  images.forEach(image => {
+function resizeScaled(scaled) {
+  scaled.forEach(image => {
     const origW = image.dataset.origW;
     const origH = image.naturalHeight;
     
@@ -31,7 +31,7 @@ function resizeImages(images) {
   });
 }
 
-function observeImages(images) {
+function observeVisualized(visualized) {
   const observerOptions = {
     root: null,
     rootMargin: '0px',
@@ -48,13 +48,15 @@ function observeImages(images) {
   };
 
   const observer = new IntersectionObserver(observerCallback, observerOptions);
-  images.forEach(image => observer.observe(image));
+  visualized.forEach(image => observer.observe(image));
 }
 
 window.addEventListener('load', function () {
-  const images = document.querySelectorAll('img.scaled');
+  const scaled = document.querySelectorAll('.scaled');
 
-  storeOriginalSizes(images);
-  resizeImages(images);
-  observeImages(images);
+  storeScaled(scaled);
+  resizeScaled(scaled);
+
+  const visualized = document.querySelectorAll('.visualized');
+  observeVisualized(visualized);
 });

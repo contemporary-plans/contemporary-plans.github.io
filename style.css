@@ -67,17 +67,24 @@ figure {
     margin: auto;
 }
 
-img.scaled {
+.visualized {
+    opacity: 0;
+}
+
+.visualized.visible {
+    opacity: 1;
+    transition: opacity 1s ease-in-out;
+}
+
+.scaled {
     margin: 0;
     padding: 0;
     display: inline;
-    opacity: 0;
-    transition: opacity 1s ease-in-out;
     max-width: 100%;
 }
 
-img.scaled.visible {
-  opacity: 1;
+section p {
+    font-size: 80%;
 }
 
 @media (max-width: 1024px) {
