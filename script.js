@@ -1,5 +1,33 @@
 const resizeFactor = 2;
 
+function setupHoverOverlays(images) {
+  images.forEach(img => {
+    const originalSrc = img.getAttribute('src');
+    
+    if (!/\.png$/i.test(originalSrc)) {
+      return;
+    }
+
+    const overlaySrc  = originalSrc.replace(/\.png$/i, '_overlay.png');
+    const test = new Image();
+    
+    test.onload = () => {
+      img.dataset.overlay  = overlaySrc;
+      img.dataset.original = originalSrc;
+
+      img.addEventListener('mouseenter', () => {
+        img.src = img.dataset.overlay;
+      });
+
+      img.addEventListener('mouseleave', () => {
+        img.src = img.dataset.original;
+      });
+    };
+
+    test.src = overlaySrc;
+  });
+}
+
 function storeScaled(scaled) {
   scaled.forEach(image => {
     if (!image.dataset.origW) {
@@ -56,6 +84,7 @@ window.addEventListener('load', function () {
 
   storeScaled(scaled);
   resizeScaled(scaled);
+  setupHoverOverlays(scaled);
 
   const visualized = document.querySelectorAll('.visualized');
   observeVisualized(visualized);
